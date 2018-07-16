@@ -1,29 +1,31 @@
 import Router from "koa-router";
 import * as handlers from "./handlers";
+import validate from "koa-req-validator";
 
 const router = new Router({
   prefix: "/notifier"
 });
 
 /**
- * @api {get} /notifier/sendNotify Send notify to user
+ * @api {get} /notifier/sendNotify Send notify to github users
  * @apiVersion 1.0.0
- * @apiName GetCategories
- * @apiGroup Category
- * @apiHeader {String} Authorization Users unique accessToken
- *
+ * @apiName sendNotify
+ * @apiGroup Notify
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *         "id": "45c6c461-32f7-4685-aef8-8a5357663f1d",
- *         "name": "Second category",
- *         "description": "",
- *         "color": "#f31d1d",
- *         "image": null,
- *      }
+ *         "status": "true"
+ *     }
  *
  */
 
-router.get("/sendNotify", handlers.sendNotify);
+router.get(
+  '/sendNotify', 
+  validate({
+    logins: ["require", "logins is require"],
+    text: ["require", "text is require"]
+  }),
+  handlers.sendNotify
+);
 
 export default router;

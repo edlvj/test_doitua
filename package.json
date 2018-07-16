@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "docs:build": "rimraf ./docs && apidoc -i ./src/ -o ./docs"
   },
   "repository": {
     "type": "git",
@@ -19,17 +20,24 @@
   "homepage": "https://github.com/edlvj/test_doitua#readme",
   "dependencies": {
     "apidoc": "^0.17.6",
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-register": "^6.26.0",
+    "bluebird": "^3.5.1",
     "eslint": "^5.1.0",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
+    "koa-compose": "^4.1.0",
+    "koa-convert": "^1.2.0",
     "koa-cors": "0.0.16",
+    "koa-helmet": "^4.0.0",
+    "koa-json-error": "^3.1.2",
     "koa-logger": "^3.2.0",
     "koa-mount": "^3.0.0",
     "koa-passport": "^4.1.0",
+    "koa-req-validator": "^0.2.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "nodemailer": "^4.6.7",
@@ -43,6 +51,7 @@
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0"
   }
