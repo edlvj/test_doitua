@@ -8,7 +8,7 @@ const baseConfig = {
     password: "45de5b4a79b2ea"
   },
   githubApi: {
-    token: "0f58aaf39edeb58227ce2eb3e6f896494333f713"
+    token: "4db0ede54c1dd89579a3e1c50575cfc1b209913a"
   },
   weatherApi: {
     token: "c474b15b4d2e83d6fa0cc87ee2353d92"

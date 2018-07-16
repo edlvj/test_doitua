@@ -27,6 +27,7 @@
     "babel-register": "^6.26.0",
     "bluebird": "^3.5.1",
     "eslint": "^5.1.0",
+    "http-client": "^4.3.1",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
@@ -45,9 +46,11 @@
     "passport-jwt": "^4.0.0",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
+    "request": "^2.87.0",
     "rimraf": "^2.6.2",
     "sequelize": "^4.38.0",
-    "sequelize-cli": "^4.0.0"
+    "sequelize-cli": "^4.0.0",
+    "validator": "^4.9.0"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",

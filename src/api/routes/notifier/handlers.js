@@ -3,30 +3,29 @@ import getProfile from "../../../services/github-api";
 import getWeather from "../../../services/openweathermap-api";
 
 export const sendNotify = async ctx => {
-  const text = ctx.params.text;
+  const text = ctx.query.text;
 
-  var logins = ctx.params.logins.split(',');
+  var logins = ctx.query.logins.split(',');
   const promises = [];
 
-  console.log(text);
-  console.log(logins);
-  /*  
-    
-    for (let i = 0; i < logins.length; i++) {
-      let githubProfile = await getProfile(logins[0]);
-      let cityWeather = await getWeather(githubProfile.location);
-      promises.push(
-        sendEmail(
-          profile.email, 
-          {
-            weather: cityWeather.weather.main
-          }
-        )
-      );
-    }
+  for (let i = 0; i < logins.length; i++) {
+    let githubProfile = await getProfile(logins[i]);
 
-    await Bluebird.all(promises);
-  */
+    let cityWeather = await getWeather(githubProfile.data.location);
+    return cityWeather;
+
+    // promises.push(
+    //   sendEmail(
+    //     profile.email, 
+    //     {
+    //       weather: cityWeather.weather.main
+    //     }
+    //   )
+    // );
+  }
+
+ // await Bluebird.all(promises);
+ // */
   ctx.body = {
     status: "ok"
   };
