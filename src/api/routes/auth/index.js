@@ -1,31 +1,44 @@
 import Router from "koa-router";
 import * as handlers from "./handlers";
+import validate from "koa-req-validator";
+import multer from "koa-multer";
+
+const upload = multer({ 
+  dest: 'uploads/' 
+});
 
 const router = new Router({
   prefix: "/auth"
 });
 
 /**
- * @api {get} /auth/sign_in Sign ui for user
+ * @api {post} /auth/sign_in Sign up for user
  * @apiVersion 1.0.0
- * @apiName GetCategories
- * @apiGroup Category
+ * @apiName User SignUp
+ * @apiGroup Auth
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *         "id": "45c6c461-32f7-4685-aef8-8a5357663f1d",
- *      }
+ *        "token": "hweiurt3478fgerfghr8hf738" 
+ *        "id": "45c6c461-32f7-4685-aef8-8a5357663f1d",
+ *     }
  *
  */
 
-router.get("/sign_in", handlers.signIn);
+router.post("/sign_in", 
+  validate({
+    email: ["require", "isEmail", "Invalid email address"],
+    password: ["require", "password is require"]
+  }),
+  upload.single('avatar'),
+  handlers.signIn);
 
 /**
  * @api {get} /auth/sign_up Sign up for user
  * @apiVersion 1.0.0
- * @apiName GetCategories
- * @apiGroup Category
+ * @apiName User Sign In
+ * @apiGroup Auth
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -35,6 +48,12 @@ router.get("/sign_in", handlers.signIn);
  *
  */
 
-router.get("/sign_up", handlers.signUp);
+router.post(
+  '/sign_up', 
+  validate({
+    email: ["require", "isEmail", "Invalid email address"],
+    password: ["require", "isLength(6, 32)", "password is require"]
+  }),
+  handlers.signUp);
 
 export default router;

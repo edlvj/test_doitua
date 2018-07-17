@@ -2,13 +2,17 @@ const env = process.env.NODE_ENV || "development";
 
 const baseConfig = {
   environment: process.env.NODE_ENV,
+  jwt: {
+    secret: "testdoit",
+    tokenExpireTime: 900
+  },
   email: {
     host: "smtp.mailtrap.io",
     username: "f7bae93d3bd4c9",
     password: "45de5b4a79b2ea"
   },
   githubApi: {
-    token: "4db0ede54c1dd89579a3e1c50575cfc1b209913a"
+    token: "f09b42950aedddea16ed2be9aa0a285dc46848a6"
   },
   weatherApi: {
     token: "c474b15b4d2e83d6fa0cc87ee2353d92"
@@ -18,27 +22,27 @@ const baseConfig = {
 const config = {
   development: {
     ...baseConfig,
-    username: "root",
-    password: null,
-    database: "database_development",
+    username: "testdoit",
+    password: "testdoit",
+    database: "testdoit_development",
     host: "127.0.0.1",
-    dialect: "mysql"
+    dialect: "postgres"
   },
   test: {
     ...baseConfig,
-    username: "root",
-    password: null,
-    database: "database_test",
+    username: "testdoit",
+    password: "testdoit",
+    database: "testdoit_test",
     host: "127.0.0.1",
-    dialect: "mysql"
+    dialect: "postgres" 
   },
   production: {
     ...baseConfig,
-    username: "root",
-    password: null,
-    database: "database_production",
+    username: "testdoit",
+    password: "testdoit",
+    database: "testdoit_production",
     host: "127.0.0.1",
-    dialect: "mysql"
+    dialect: "postgres" 
   }
 }
 

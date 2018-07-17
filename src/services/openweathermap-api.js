@@ -7,7 +7,5 @@ export default function(cityName) {
   const encodedCityName = encodeURIComponent(cityName);
   const requestUrl = `${REQUEST_URL}?q=${encodedCityName}&appid=${config.weatherApi.token}`;
 
-  return axios.get(requestUrl, reqParams).then(res => {
-    return res;
-  })
+  return axios.get(requestUrl);
 }

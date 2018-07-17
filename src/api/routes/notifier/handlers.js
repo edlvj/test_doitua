@@ -6,27 +6,53 @@ export const sendNotify = async ctx => {
   const text = ctx.query.text;
 
   var logins = ctx.query.logins.split(',');
-  const promises = [];
+  var logs = [];
 
   for (let i = 0; i < logins.length; i++) {
-    let githubProfile = await getProfile(logins[i]);
+    try {
+      let githubProfile = await getProfile(logins[i]);
+    } catch (err) {
+      statuses[logins[i]].push(
+        { status: false, 
+          reason: err
+        }
+      );
+    }
 
-    let cityWeather = await getWeather(githubProfile.data.location);
-    return cityWeather;
+    try {
+      let cityWeather = await getWeather(githubProfile.data.location);
+    } catch (err) {
+      statuses[logins[i]].push(
+        { status: false, 
+          reason: err
+        }
+      );
+    }
 
-    // promises.push(
-    //   sendEmail(
-    //     profile.email, 
-    //     {
-    //       weather: cityWeather.weather.main
-    //     }
-    //   )
-    // );
+    try {
+      sendEmail(
+        githubProfile.email, 
+        {
+          text: text,
+          weather: cityWeather.data.weather.main
+        }
+      )
+    } catch (err) {
+      statuses[logins[i]].push(
+        { status: false, 
+          reason: err
+        }
+      );
+    }
   }
 
- // await Bluebird.all(promises);
- // */
   ctx.body = {
     status: "ok"
   };
 };
+
+
+const setStatus = ctx => {
+  
+
+}
