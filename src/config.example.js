@@ -2,6 +2,7 @@ const env = process.env.NODE_ENV || "development";
 
 const baseConfig = {
   environment: process.env.NODE_ENV,
+  appUrl: 'http://localhost:4000',
   jwt: {
     secret: "testdoit",
     tokenExpireTime: 900

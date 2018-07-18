@@ -5,28 +5,26 @@ import getWeather from "../../../services/openweathermap-api";
 export const sendNotify = async ctx => {
   const text = ctx.query.text;
 
-  var logins = ctx.query.logins.split(',');
-  var logs = [];
+  const logins = ctx.query.logins.split(',');
+  var notifyLogs = [];
 
-  for (let i = 0; i < logins.length; i++) {
+  for (var i = 0; i < logins.length; i++) {
+    var notifyLog = {
+      status: true 
+    };
+
     try {
-      let githubProfile = await getProfile(logins[i]);
+      const githubProfile = await getProfile(logins[i]);
     } catch (err) {
-      statuses[logins[i]].push(
-        { status: false, 
-          reason: err
-        }
-      );
+      notifyLog['status'] = false;
+      continue;
     }
 
     try {
-      let cityWeather = await getWeather(githubProfile.data.location);
+      const cityWeather = await getWeather(githubProfile.data.location);
     } catch (err) {
-      statuses[logins[i]].push(
-        { status: false, 
-          reason: err
-        }
-      );
+      notifyLog['status'] = false;
+      continue;
     }
 
     try {
@@ -38,21 +36,12 @@ export const sendNotify = async ctx => {
         }
       )
     } catch (err) {
-      statuses[logins[i]].push(
-        { status: false, 
-          reason: err
-        }
-      );
+      notifyLog['status'] = false;
+      continue;
     }
+
+    notifyLogs.push(notifyLog);
   }
 
-  ctx.body = {
-    status: "ok"
-  };
+  ctx.body = notifyLogs;
 };
-
-
-const setStatus = ctx => {
-  
-
-}
