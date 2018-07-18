@@ -3,7 +3,7 @@ import * as path from 'path';
 import uuidv4 from 'uuid/v4';
 import config from '../config';
 
-const UPLOADS_PATH = './uploads';
+const UPLOADS_PATH = '../../uploads';
 
 export const saveFile = function (file) {
   const ext = path.extname(file.filename);

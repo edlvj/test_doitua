@@ -42,7 +42,12 @@ router.post("/sign_in",
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *         "id": "45c6c461-32f7-4685-aef8-8a5357663f1d",
+ *           "id": "ad7b3dc5-0bf4-4f5f-ab3a-a20dccd9fcb0",
+ *           "email": "test@test.com",
+ *           "password": "$2b$05$HFETMO2xfbm0ehElWf3PEOvPWANssNwMShz2WC5DpvuHUdIydtsse",
+ *           "avatarUrl": "/home/ed/projects/test_doitua/uploads/1531940659683-f659f219a82d (1).jpg",
+ *           "createdAt": "2018-07-18T19:04:19.743Z",
+ *           "updatedAt": "2018-07-18T19:04:19.743Z"
  *      }
  *
  */

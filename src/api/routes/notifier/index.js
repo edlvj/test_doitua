@@ -10,7 +10,7 @@ const router = new Router({
  * @api {get} /notifier/sendNotify Send notify to github users
  * @apiVersion 1.0.0
  * @apiName sendNotify
- * @apiGroup Notify
+ * @apiGroup Notifier
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {

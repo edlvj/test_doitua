@@ -15,6 +15,7 @@ export const sendNotify = async ctx => {
 
     try {
       const githubProfile = await getProfile(logins[i]);
+      console.log(githubProfile);
     } catch (err) {
       notifyLog['status'] = false;
       continue;
@@ -22,6 +23,7 @@ export const sendNotify = async ctx => {
 
     try {
       const cityWeather = await getWeather(githubProfile.data.location);
+      console.log(cityWeather);
     } catch (err) {
       notifyLog['status'] = false;
       continue;

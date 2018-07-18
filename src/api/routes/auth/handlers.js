@@ -14,11 +14,6 @@ export const signUp = async (ctx, next) => {
 
   if(errors.length > 0)
     ctx.throw(400, errors.join(', '));
-  
-  const avatar = saveFile(files[0]);
-
-  fields.password = await bcrypt.hash(fields.password, 5);
-  fields.avatarUrl = getFileUrl(avatar.path);
 
   const user = await models.user.findOne({
     where: {
@@ -27,6 +22,11 @@ export const signUp = async (ctx, next) => {
   });
 
   if(!user) {
+    const avatar = saveFile(files[0]);
+
+    fields.password = await bcrypt.hash(fields.password, 5);
+    fields.avatarUrl = getFileUrl(avatar.path);
+
     const user = await models.user.create(fields);
 
     ctx.body = {
@@ -41,7 +41,7 @@ export const signUp = async (ctx, next) => {
 
 export const signIn = async ctx => {
   const fields = ctx.request.body;
-  const errors = validateFieds(fields);
+  const errors = validateFields(fields);
 
   if(errors.length > 0)
     ctx.throw(400, errors.join(', '));
