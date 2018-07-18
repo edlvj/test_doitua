@@ -1,11 +1,5 @@
 import Router from "koa-router";
 import * as handlers from "./handlers";
-import validate from "koa-req-validator";
-import multer from "koa-multer";
-
-const upload = multer({ 
-  dest: 'uploads/' 
-});
 
 const router = new Router({
   prefix: "/auth"
@@ -14,7 +8,7 @@ const router = new Router({
 /**
  * @api {post} /auth/sign_in Sign up for user
  * @apiVersion 1.0.0
- * @apiName User SignUp
+ * @apiName User Sign Up
  * @apiGroup Auth
  *
  * @apiSuccessExample {json} Success-Response:
@@ -26,16 +20,11 @@ const router = new Router({
  *
  */
 
-router.post("/sign_in", 
-  validate({
-    email: ["require", "isEmail", "Invalid email address"],
-    password: ["require", "password is require"]
-  }),
-  upload.single('avatar'),
+router.post("/sign_in",
   handlers.signIn);
 
 /**
- * @api {get} /auth/sign_up Sign up for user
+ * @api {post} /auth/sign_up Sign up for user
  * @apiVersion 1.0.0
  * @apiName User Sign In
  * @apiGroup Auth
@@ -49,11 +38,7 @@ router.post("/sign_in",
  */
 
 router.post(
-  '/sign_up', 
-  validate({
-    email: ["require", "isEmail", "Invalid email address"],
-    password: ["require", "isLength(6, 32)", "password is require"]
-  }),
+  '/sign_up',
   handlers.signUp);
 
 export default router;
