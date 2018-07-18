@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import models from "../../../db";
 import asyncBusboy from "async-busboy";
 import { validateFields } from "./helpers";
-import { saveFile, validateFile } from "./../../../services/fileupload";
+import { saveFile, validateFile, getFileUrl } from "./../../../services/fileupload";
 
 export const signUp = async (ctx, next) => {
   let { files, fields } = await asyncBusboy(ctx.req);
@@ -12,17 +12,13 @@ export const signUp = async (ctx, next) => {
 
   const errors = [...fileValidations, ...fieldsValidations];
 
-  console.log(errors);
-
   if(errors.length > 0)
     ctx.throw(400, errors.join(', '));
   
   const avatar = saveFile(files[0]);
 
   fields.password = await bcrypt.hash(fields.password, 5);
-  fields.avatarUrl = avatar.path;
-
-  console.log(fields);
+  fields.avatarUrl = getFileUrl(avatar.path);
 
   const user = await models.user.findOne({
     where: {
@@ -30,12 +26,12 @@ export const signUp = async (ctx, next) => {
     }
   });
 
-  console.log(user);
-
   if(!user) {
+    const user = await models.user.create(fields);
+
     ctx.body = {
       token: user.getAccessToken(),
-      user: await models.user.create(fields)
+      user: user
     };
     await next();
   } else {
@@ -45,22 +41,16 @@ export const signUp = async (ctx, next) => {
 
 export const signIn = async ctx => {
   const fields = ctx.request.body;
-
   const errors = validateFieds(fields);
-  console.log(errors);
 
   if(errors.length > 0)
     ctx.throw(400, errors.join(', '));
-
-  console.log(fields);
 
   const user = await models.user.findOne({
     where: {
       email: fields.email
     }
   });
-
-  console.log(user);
 
   if(!user) {
     ctx.throw(400, 'Email or Password Wrong');

@@ -27,13 +27,10 @@
     "babel-eslint": "^8.2.6",
     "babel-register": "^6.26.0",
     "bcrypt": "^3.0.0",
-    "bluebird": "^3.5.1",
     "eslint": "^5.1.0",
-    "http-client": "^4.3.1",
     "import-dir": "0.0.1",
     "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.2",
-    "koa-better-body": "^3.0.4",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
     "koa-convert": "^1.2.0",
@@ -43,8 +40,6 @@
     "koa-jwt": "^3.3.2",
     "koa-logger": "^3.2.0",
     "koa-mount": "^3.0.0",
-    "koa-multer": "^1.0.2",
-    "koa-passport": "^4.1.0",
     "koa-req-validator": "^0.2.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
@@ -53,16 +48,19 @@
     "nodemon": "^1.18.1",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
-    "request": "^2.87.0",
     "rimraf": "^2.6.2",
     "sequelize": "^4.38.0",
     "sequelize-cli": "^4.0.0",
+    "uuid": "^3.3.2",
     "validator": "^4.9.0"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "shipit-cli": "^4.1.1",
+    "shipit-deploy": "^4.1.1",
+    "shipit-shared": "^4.4.2"
   }
 }
