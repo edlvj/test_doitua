@@ -6,7 +6,7 @@ const router = new Router({
 });
 
 /**
- * @api {post} /auth/sign_in Sign up for user
+ * @api {post} /api/auth/sign_in Sign in for user
  * @apiVersion 1.0.0
  * @apiName User Sign Up
  * @apiGroup Auth
@@ -34,7 +34,7 @@ router.post("/sign_in",
   handlers.signIn);
 
 /**
- * @api {post} /auth/sign_up Sign up for user
+ * @api {post} /api/auth/sign_up Sign up for user
  * @apiVersion 1.0.0
  * @apiName User Sign In
  * @apiGroup Auth
