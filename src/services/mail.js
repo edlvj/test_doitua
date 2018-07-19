@@ -1,12 +1,12 @@
 import nodemailer from "nodemailer";
-import { email } from "../config";
+import config from "../config";
+import Bluebird from "bluebird";
 
 const transporter = nodemailer.createTransport({
-  host: email.host,
-  port: 465,
+  service: 'gmail',
   auth: {
-    user: email.username,
-    pass: email.password
+    user: config.email.username,
+    pass: config.email.password
   }
 });
 
@@ -14,20 +14,22 @@ const serviceEmail = options => {
   return {
     from: "Test email <hello@testdoit.com>",
     subject: `You got test message.`,
-    html: `Your Weather is ${options.weather}`
+    html: `${options.text}. Your Weather is ${options.weather}`
   };
 };
 
 export default function sendEmail(receiver, property = null) {
-  var options = serviceEmail(property);
-  options.to = receiver;
+  return new Bluebird((resolve, reject) => {
+    var options = serviceEmail(property);
+    options.to = receiver;
 
-  transporter.sendMail(options, (error, info) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(info);
-    }
-  });
+    transporter.sendMail(options, (error, info) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(info);
+      }
+    });
+  });  
 }
   

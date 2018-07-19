@@ -7,7 +7,7 @@ const router = new Router({
 });
 
 /**
- * @api {get} /notifier/sendNotify Send notify to github users
+ * @api {get} /notifier/sendNotify?logins=edlvj&text=hello Send notify to github users
  * @apiVersion 1.0.0
  * @apiName sendNotify
  * @apiGroup Notifier

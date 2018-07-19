@@ -7,39 +7,38 @@ export const sendNotify = async ctx => {
 
   const logins = ctx.query.logins.split(',');
   var notifyLogs = [];
-
+  
   for (var i = 0; i < logins.length; i++) {
     var notifyLog = {
-      status: true 
+      status: true,
+      message: 'ok'
     };
 
     try {
-      const githubProfile = await getProfile(logins[i]);
-      console.log(githubProfile);
+      var githubProfile = await getProfile(logins[i]);
     } catch (err) {
       notifyLog['status'] = false;
-      continue;
+      notifyLog['message'] = 'Invalid github name or private email';
     }
 
     try {
-      const cityWeather = await getWeather(githubProfile.data.location);
-      console.log(cityWeather);
+      var cityWeather = await getWeather(githubProfile.data.location);
     } catch (err) {
       notifyLog['status'] = false;
-      continue;
+      notifyLog['message'] = 'Wrong location or no info about weather';
     }
 
     try {
       sendEmail(
-        githubProfile.email, 
+        githubProfile.data.email, 
         {
           text: text,
-          weather: cityWeather.data.weather.main
+          weather: cityWeather.data.weather[0].main
         }
       )
     } catch (err) {
       notifyLog['status'] = false;
-      continue;
+      notifyLog['message'] = 'Email not sended';
     }
 
     notifyLogs.push(notifyLog);
