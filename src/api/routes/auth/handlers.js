@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import models from "../../../db";
 import asyncBusboy from "async-busboy";
 import { validateFields } from "./helpers";

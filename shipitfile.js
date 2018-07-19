@@ -17,7 +17,7 @@ module.exports = shipit => {
       repositoryUrl: 'https://github.com/edlvj/test_doitua',
     },
     staging: {
-      servers: 'deploy@18.195.216.164',
+      servers: 'deploy@18.195.213.183',
     },
   });
 

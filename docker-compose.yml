@@ -1,15 +1,17 @@
-version: "2"
+version: '2'
 services:
-  node:
+  web:
+    build: .
+    command: bash -c "npm install node-gyp -g && npm i && npm run dev"
     volumes:
       - ./src:/usr/src/app/src
-    command: ["npm", "run", "dev"]
-  db:
-    image: "postgres"
-    environment:
-      - POSTGRES_PASSWORD=test_doitua
-      - POSTGRES_USER=ploy=test_doitua
-      - POSTGRES_DB=test_doitua
-  lb:
     ports:
-      - '4000:80'
+      - "4000:80"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:9.6.2-alpine
+    environment:
+      POSTGRES_PASSWORD: test_doitua
+      POSTGRES_USER: test_doitua
+      POSTGRES_DB: todos

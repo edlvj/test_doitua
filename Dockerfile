@@ -1,6 +1,6 @@
 FROM node:8.4.0
 
-RUN apt-get -y update && apt-get install -y wget nano git build-essential openssl libssl-dev yasm pkg-config
+RUN apt-get -y update && apt-get install -y wget nano git build-essential openssl libssl-dev yasm pkg-config libstdc++6 libc6-dev
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
