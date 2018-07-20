@@ -12,7 +12,7 @@ const app = new Koa();
 app.use(middleware());
 app.use(mount(api));
 app.use(serve(`${process.cwd()}/docs`));
-app.use(serve(`${process.cwd()}/uploads`));
+app.use(mount("/uploads", serve(`${process.cwd()}/uploads`)));
 
 app.listen(port, () => {
   console.log(`App started on port ${port} with environment ${env}`);
