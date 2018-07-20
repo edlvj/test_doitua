@@ -6,11 +6,15 @@ const router = new Router({
 });
 
 /**
- * @api {post} /api/auth/sign_in Sign in for user
+ * @api {post} /api/auth/sign_up Sign up for user
  * @apiVersion 1.0.0
  * @apiName User Sign Up
  * @apiGroup Auth
  *
+ * @apiParam {String} email User email 
+ * @apiParam {String} password User password
+ * @apiParam {File} avatar User avatar
+ * 
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -30,14 +34,18 @@ const router = new Router({
  *
  */
 
-router.post("/sign_in",
-  handlers.signIn);
+router.post(
+  '/sign_up',
+  handlers.signUp);
 
 /**
- * @api {post} /api/auth/sign_up Sign up for user
+ * @api {post} /api/auth/sign_in Sign in for user
  * @apiVersion 1.0.0
  * @apiName User Sign In
  * @apiGroup Auth
+ * 
+ * @apiParam {String} email User email 
+ * @apiParam {String} password User password 
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -52,8 +60,7 @@ router.post("/sign_in",
  *
  */
 
-router.post(
-  '/sign_up',
-  handlers.signUp);
+router.post("/sign_in",
+  handlers.signIn);
 
 export default router;

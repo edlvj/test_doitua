@@ -20,16 +20,16 @@ export const getFileUrl = function(filepath) {
   return config.appUrl + '/uploads/' + filePath;
 }
 
-export const validateFile = function (file) {
+export const validateImageFile = function (file) {
   var fileValidationErrors = [];
-  
-  if(!file) {
+
+  if(typeof file === 'undefined') {
     fileValidationErrors.push('Avatar can not be empty');
   }
   
-  if(file.filename && !(/\.(jpg|jpeg|png)$/i).test(file.filename)) {
-    fileValidationErrors.push('Avatar must have .jpg, .jpeg, .png format');    
+  if(typeof file !== 'undefined' && !(/\.(jpg|jpeg|png)$/i).test(file.filename)) {
+    fileValidationErrors.push('Avatar must have .jpg, .jpeg, .png format');
   }
 
-  return fileValidationErrors;
+  return fileValidationErrors; 
 }

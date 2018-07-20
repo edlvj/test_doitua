@@ -2,12 +2,12 @@ import bcrypt from "bcryptjs";
 import models from "../../../db";
 import asyncBusboy from "async-busboy";
 import { validateFields } from "./helpers";
-import { saveFile, validateFile, getFileUrl } from "./../../../services/fileupload";
+import { saveFile, validateImageFile, getFileUrl } from "./../../../services/fileupload";
 
 export const signUp = async (ctx, next) => {
   let { files, fields } = await asyncBusboy(ctx.req);
   
-  const fileValidations = validateFile(files[0]);
+  const fileValidations = validateImageFile(files[0]);
   const fieldsValidations = validateFields(fields);
 
   const errors = [...fileValidations, ...fieldsValidations];

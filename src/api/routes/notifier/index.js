@@ -11,6 +11,11 @@ const router = new Router({
  * @apiVersion 1.0.0
  * @apiName sendNotify
  * @apiGroup Notifier
+ * 
+ * 
+ * @apiParam {String} logins Notifier logins 
+ * @apiParam {String} text Notifier text
+ * 
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     [{
